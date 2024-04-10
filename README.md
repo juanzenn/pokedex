@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pokedex
 
-## Getting Started
+A pokedex app using the [Pokemon API](https://pokeapi.co/). This project was created for a technical challenge.
 
-First, run the development server:
+## Description
+
+The main application is a SPA using Next and React. The main feature is a dashboard with a list off all pokemons, and a single page with most information about a selected Pokemon. As an extra feature, I added the following aspects:
+
+-
+-
+-
+
+## Local Development
+
+To run the project locally, fork the repository and clone it to your local machine. Then, run the following commands:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+There is no need for .env files since all the API is public.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technologies
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Next [Link](https://nextjs.org/)
+- React [Link](https://reactjs.org/)
+- TailwindCSS [Link](https://tailwindcss.com/)
+- Shadcn/ui [Link](https://https://ui.shadcn.com/)
+- Tanstack Query [Link](https://tanstack.com/query)
