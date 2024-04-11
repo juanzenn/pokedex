@@ -1,12 +1,18 @@
+"use client";
+
 import { capitalize, cn } from "@/lib/utils";
 import Link from "next/link";
 import { type Pokemon } from "pokenode-ts";
 
 type PokemonGridPros = {
   pokemons: Pokemon[];
+  currentPage?: number;
 };
 
-export default function PokemonGrid({ pokemons }: PokemonGridPros) {
+export default function PokemonGrid({
+  pokemons,
+  currentPage,
+}: PokemonGridPros) {
   if (pokemons.length <= 0) {
     return null;
   }
@@ -16,7 +22,9 @@ export default function PokemonGrid({ pokemons }: PokemonGridPros) {
       <section className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {pokemons.map(({ id, name, sprites: { front_default: image } }) => (
           <Link
-            href={`/pokemon/${name}`}
+            href={
+              `/pokemon/${name}` + (currentPage ? `?page=${currentPage}` : "")
+            }
             key={id}
             className={cn(
               "flex items-center justify-center flex-col bg-primary/70 backdrop-blur-sm p-4 h-[150px]",

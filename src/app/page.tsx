@@ -18,7 +18,7 @@ export default function Home() {
       {isFetching ? (
         <GridSkeleton />
       ) : (
-        <PokemonGrid pokemons={pokemons ?? []} />
+        <PokemonGrid pokemons={pokemons ?? []} currentPage={currentPage} />
       )}
 
       <Pagination

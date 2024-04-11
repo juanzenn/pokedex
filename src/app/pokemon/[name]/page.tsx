@@ -1,5 +1,6 @@
 "use client";
 
+import BackToHome from "@/components/back-to-home";
 import PokemonAbility from "@/components/pokemon-ability";
 import PokemonMoves from "@/components/pokemon-moves";
 import PokemonType from "@/components/pokemon-type";
@@ -36,11 +37,7 @@ export default function PokemonPage({ params: { name } }: Props) {
     pokemon && (
       <section className="container">
         <div className="bg-primary/70 backdrop-blur-sm p-6 rounded-xl">
-          <Button className="mb-6 sticky top-4 shadow-md z-10" asChild>
-            <Link href="/" className="flex gap-2 font-medium">
-              <ChevronLeft size={14} /> Back
-            </Link>
-          </Button>
+          <BackToHome />
 
           <section className="flex flex-col-reverse gap-4 lg:gap-8 lg:flex-row">
             <div className="flex-1 space-y-8">
