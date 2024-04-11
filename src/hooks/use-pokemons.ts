@@ -5,5 +5,6 @@ export function useGetPokemons(page: number = 0) {
   return useQuery({
     queryKey: ["pokemons", page],
     queryFn: async () => await getPokemons(page),
+    staleTime: 5 * 1000,
   });
 }

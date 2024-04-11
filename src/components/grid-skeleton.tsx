@@ -1,6 +1,6 @@
 "use client";
 
-import { range } from "@/lib/utils";
+import { cn, range } from "@/lib/utils";
 import React from "react";
 
 export default function GridSkeleton() {
@@ -10,7 +10,11 @@ export default function GridSkeleton() {
         {range(20).map((id) => (
           <article
             key={id}
-            className="flex items-center justify-center flex-col bg-primary/50 backdrop-blur-xl rounded-lg p-4 border border-primary/20 shadow-md h-[150px] animate-pulse"
+            className={cn(
+              "flex items-center justify-center flex-col bg-primary/70 backdrop-blur-sm p-4 h-[150px]",
+              "border border-white/5 shadow-md rounded-lg",
+              "animate-pulse"
+            )}
           />
         ))}
       </section>
