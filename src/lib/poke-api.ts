@@ -15,12 +15,13 @@ const api = {
 
 // *** TYPES *** //
 
-type Pokemon = {
+export type Pokemon = {
   id: number;
   name: string;
   height: number;
   order: number;
   weight: number;
+  sprites: PokemonSprite;
   stats: PokemonStat[];
   types: PokemonType[];
 };
@@ -40,6 +41,17 @@ type PokemonStat = {
     id: number;
     name: string;
   };
+};
+
+type PokemonSprite = {
+  front_default: string;
+  front_shiny: string;
+  front_female: string;
+  front_shiny_female: string;
+  back_default: string;
+  back_shiny: string;
+  back_female: string;
+  back_shiny_female: string;
 };
 
 // *** API CALLS *** //
@@ -71,6 +83,7 @@ export async function getPokemons(currentPage: number = 0) {
         weight: data.weight,
         types: data.types,
         stats: data.stats,
+        sprites: data.sprites,
       };
     })
   );

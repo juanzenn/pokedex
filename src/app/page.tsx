@@ -1,5 +1,7 @@
 "use client";
 
+import GridSkeleton from "@/components/grid-skeleton";
+import PokemonGrid from "@/components/pokemon-grid";
 import { Button } from "@/components/ui/button";
 import { useGetPokemons } from "@/hooks/use-pokemons";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
@@ -30,27 +32,33 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="flex gap-2 mb-3">
+    <main
+      className="flex min-h-screen flex-col "
+      style={{
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1620121692029-d088224ddc74?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+        backgroundBlendMode: "overlay",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+    >
+      <div className="flex gap-2 mb-3 mx-auto">
         <Button
-          disabled={!Boolean(previous?.length) || isFetching}
+          disabled={!Boolean(previous?.length)}
           onClick={handleChangePage(-1)}
         >
           &lt;
         </Button>
-        <Button
-          disabled={!Boolean(next?.length) || isFetching}
-          onClick={handleChangePage(1)}
-        >
+        <Button disabled={!Boolean(next?.length)} onClick={handleChangePage(1)}>
           &gt;
         </Button>
       </div>
 
-      {isFetching && <p>Loading...</p>}
-
-      {pokemons &&
-        pokemons.length > 0 &&
-        pokemons?.map((pokemon) => <p key={pokemon.id}>{pokemon.name}</p>)}
+      {isFetching ? (
+        <GridSkeleton />
+      ) : (
+        <PokemonGrid pokemons={pokemons ?? []} />
+      )}
     </main>
   );
 }
