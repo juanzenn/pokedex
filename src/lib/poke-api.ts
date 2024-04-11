@@ -1,7 +1,7 @@
-import axios, { AxiosRequestConfig } from "axios";
 import { PokemonClient, type Pokemon } from "pokenode-ts";
+
 // *** API CALLS *** //
-const api = new PokemonClient();
+export const api = new PokemonClient();
 
 export async function getPokemons(currentPage: number = 0) {
   const LIMIT = 15;
