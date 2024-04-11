@@ -11,8 +11,8 @@ export default function PokemonGrid({ pokemons }: PokemonGridPros) {
   }
 
   return (
-    <div className="container mx-auto">
-      <section className="grid grid-cols-4 gap-4">
+    <div className="container mx-auto pb-14">
+      <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {pokemons.map(({ id, name, sprites: { front_default: image } }) => (
           <article
             key={id}
