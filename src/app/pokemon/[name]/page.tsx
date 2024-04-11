@@ -8,17 +8,19 @@ import { notFound } from "next/navigation";
 import React from "react";
 
 type Props = {
-  params: { id: string };
+  params: { name: string };
 };
 
-export default function PokemonPage({ params: { id } }: Props) {
-  if (Number.isNaN(Number(id))) notFound();
+export default function PokemonPage({ params: { name } }: Props) {
+  if (name.length <= 0) notFound();
 
-  const { data: pokemon } = useGetPokemon(Number(id));
+  const { data: pokemon, isFetching } = useGetPokemon(name);
 
-  // if (!pokemon) notFound();
+  if (!isFetching && !pokemon) notFound();
+  if (isFetching) return <p>Loading...</p>;
 
-  const pokemonImage = pokemon?.sprites.other["official-artwork"].front_default;
+  const pokemonImage =
+    pokemon?.sprites.other?.["official-artwork"].front_default;
 
   return (
     <section className="container">
@@ -33,7 +35,8 @@ export default function PokemonPage({ params: { id } }: Props) {
           <div className="flex-1"></div>
 
           <figure className="bg-white w-fit rounded-2xl">
-            <img src={pokemonImage} alt={pokemon?.name} />
+            {/* eslint-disable-next-line */}
+            <img src={pokemonImage ?? ""} alt={pokemon?.name} />
           </figure>
         </section>
       </div>

@@ -1,6 +1,6 @@
-import { type Pokemon } from "@/lib/poke-api";
 import { capitalize, cn } from "@/lib/utils";
 import Link from "next/link";
+import { type Pokemon } from "pokenode-ts";
 
 type PokemonGridPros = {
   pokemons: Pokemon[];
@@ -13,10 +13,10 @@ export default function PokemonGrid({ pokemons }: PokemonGridPros) {
 
   return (
     <div className="container mx-auto pb-14">
-      <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <section className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {pokemons.map(({ id, name, sprites: { front_default: image } }) => (
           <Link
-            href={`/pokemon/${id}`}
+            href={`/pokemon/${name}`}
             key={id}
             className={cn(
               "flex items-center justify-center flex-col bg-primary/70 backdrop-blur-sm p-4 h-[150px]",
@@ -27,7 +27,7 @@ export default function PokemonGrid({ pokemons }: PokemonGridPros) {
           >
             <figure className="h-[200px]">
               {/* eslint-disable-next-line */}
-              <img src={image} alt={name} height={200} />
+              <img src={image || ""} alt={name} height={200} />
             </figure>
             <p className="text-background font-medium tracking-wide">
               {capitalize(name)}

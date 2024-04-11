@@ -6,8 +6,8 @@ import React from "react";
 export default function GridSkeleton() {
   return (
     <div className="container mx-auto pb-14">
-      <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {range(20).map((id) => (
+      <section className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {range(15).map((id) => (
           <article
             key={id}
             className={cn(

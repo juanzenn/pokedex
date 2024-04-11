@@ -9,10 +9,10 @@ export function useGetPokemons(page: number = 0) {
   });
 }
 
-export function useGetPokemon(id: number) {
+export function useGetPokemon(name: string) {
   return useQuery({
-    queryKey: ["pokemon", id],
-    queryFn: async () => await getPokemon(id),
+    queryKey: ["pokemon", name],
+    queryFn: async () => await getPokemon(name),
     staleTime: 5 * 1000,
   });
 }
