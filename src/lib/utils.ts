@@ -24,3 +24,7 @@ export function heightToMeters(height: number) {
 export function weightToKilograms(weight: number) {
   return weight / 10;
 }
+
+export function renderId(id: number) {
+  return id.toString().padStart(3, "0");
+}

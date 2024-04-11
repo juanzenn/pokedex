@@ -1,7 +1,8 @@
-import { PokemonClient, type Pokemon } from "pokenode-ts";
+import { MoveClient, PokemonClient, type Pokemon } from "pokenode-ts";
 
 // *** API CALLS *** //
-export const api = new PokemonClient();
+export const pokemonApi = new PokemonClient();
+export const moveApi = new MoveClient();
 
 export async function getPokemons(currentPage: number = 0) {
   const LIMIT = 15;
@@ -11,11 +12,11 @@ export async function getPokemons(currentPage: number = 0) {
     offset = currentPage * LIMIT;
   }
 
-  const res = await api.listPokemons(offset, LIMIT);
+  const res = await pokemonApi.listPokemons(offset, LIMIT);
 
   const pokemons = await Promise.all(
     res.results.map(async (resource): Promise<Pokemon> => {
-      const pokemon = await api.getPokemonByName(resource.name);
+      const pokemon = await pokemonApi.getPokemonByName(resource.name);
       return pokemon;
     })
   );
@@ -24,6 +25,6 @@ export async function getPokemons(currentPage: number = 0) {
 }
 
 export async function getPokemon(name: string) {
-  const pokemon = await api.getPokemonByName(name);
+  const pokemon = await pokemonApi.getPokemonByName(name);
   return pokemon;
 }

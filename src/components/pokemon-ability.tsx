@@ -28,13 +28,13 @@ export default function PokemonAbility({ ability, isHidden }: Props) {
 
   if (data)
     return (
-      <Tooltip>
+      <Tooltip delayDuration={0}>
         <TooltipTrigger>
           <div className="text-sm bg-primary/85 border-2 border-primary rounded-lg py-[2px] px-4 flex items-center justify-center shadow-sm font-medium tracking-tight text-white cursor-default">
             {capitalize(removeHyphen(data.name))}
           </div>
         </TooltipTrigger>
-        <TooltipContent className="bg-primary/95 text-white border-primary backdrop-blur-sm">
+        <TooltipContent>
           {isHidden && (
             <p className="flex items-center gap-2 mb-2">
               <Gem size={16} /> <strong>Hidden Ability</strong>

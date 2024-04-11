@@ -1,11 +1,17 @@
 "use client";
 
 import PokemonAbility from "@/components/pokemon-ability";
+import PokemonMoves from "@/components/pokemon-moves";
 import PokemonType from "@/components/pokemon-type";
 
 import { Button } from "@/components/ui/button";
 import { useGetPokemon } from "@/hooks/use-pokemons";
-import { capitalize, heightToMeters, weightToKilograms } from "@/lib/utils";
+import {
+  capitalize,
+  heightToMeters,
+  renderId,
+  weightToKilograms,
+} from "@/lib/utils";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -30,20 +36,25 @@ export default function PokemonPage({ params: { name } }: Props) {
     pokemon && (
       <section className="container">
         <div className="bg-primary/70 backdrop-blur-sm p-6 rounded-xl">
-          <Button variant="ghost" className="mb-6" asChild>
+          <Button className="mb-6 sticky top-4 shadow-md z-10" asChild>
             <Link href="/" className="flex gap-2 font-medium">
               <ChevronLeft size={14} /> Back
             </Link>
           </Button>
 
-          <section className="flex">
-            <div className="flex-1">
+          <section className="flex flex-col-reverse gap-4 lg:gap-8 lg:flex-row">
+            <div className="flex-1 space-y-8">
               <h1 className="font-bold text-4xl md:text-6xl">
-                {capitalize(pokemon.name)}
+                {capitalize(pokemon.name)} - #{renderId(pokemon.id)}
               </h1>
+
+              <section>
+                <h2 className="font-bold text-2xl mb-4">Moves</h2>
+                <PokemonMoves moves={pokemon.moves} pokemon={pokemon.name} />
+              </section>
             </div>
 
-            <div className="bg-primary/60 rounded-2xl px-6 py-3 border border-primary">
+            <div className="bg-primary/80 rounded-2xl px-6 py-3 border border-primary lg:min-w-[35%] h-fit lg:sticky top-4">
               <p className="font-semibold text-lg text-center mb-2">
                 {capitalize(pokemon.name)}
               </p>
@@ -53,7 +64,7 @@ export default function PokemonPage({ params: { name } }: Props) {
                 <img
                   src={pokemonImage ?? ""}
                   alt={pokemon?.name}
-                  className="w-[200px]"
+                  className="w-[200px] mx-auto"
                 />
               </figure>
 
