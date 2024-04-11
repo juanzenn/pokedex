@@ -52,6 +52,11 @@ type PokemonSprite = {
   back_shiny: string;
   back_female: string;
   back_shiny_female: string;
+  other: {
+    "official-artwork": {
+      front_default: string;
+    };
+  };
 };
 
 // *** API CALLS *** //
@@ -89,4 +94,18 @@ export async function getPokemons(currentPage: number = 0) {
   );
 
   return { pokemons, next: data.next, previous: data.previous };
+}
+
+export async function getPokemon(id: number) {
+  const { data } = await api.get<Pokemon>(`${endpoints.pokemon}/${id}`);
+  return {
+    id: data.id,
+    name: data.name,
+    height: data.height,
+    order: data.order,
+    weight: data.weight,
+    types: data.types,
+    stats: data.stats,
+    sprites: data.sprites,
+  };
 }

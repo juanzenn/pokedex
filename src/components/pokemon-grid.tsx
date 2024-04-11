@@ -1,5 +1,6 @@
 import { type Pokemon } from "@/lib/poke-api";
 import { capitalize, cn } from "@/lib/utils";
+import Link from "next/link";
 
 type PokemonGridPros = {
   pokemons: Pokemon[];
@@ -14,7 +15,8 @@ export default function PokemonGrid({ pokemons }: PokemonGridPros) {
     <div className="container mx-auto pb-14">
       <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {pokemons.map(({ id, name, sprites: { front_default: image } }) => (
-          <article
+          <Link
+            href={`/pokemon/${id}`}
             key={id}
             className={cn(
               "flex items-center justify-center flex-col bg-primary/70 backdrop-blur-sm p-4 h-[150px]",
@@ -30,7 +32,7 @@ export default function PokemonGrid({ pokemons }: PokemonGridPros) {
             <p className="text-background font-medium tracking-wide">
               {capitalize(name)}
             </p>
-          </article>
+          </Link>
         ))}
       </section>
     </div>
