@@ -1,15 +1,9 @@
 "use client";
 
 import { useGetPokemonMoves } from "@/hooks/use-pokemons";
-import { capitalize, range, removeHyphen } from "@/lib/utils";
+import { capitalize, removeHyphen } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
-import {
-  BombIcon,
-  CalendarMinus,
-  IceCream,
-  Loader2,
-  WavesIcon,
-} from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { NamedAPIResource, PokemonMove } from "pokenode-ts";
 import React from "react";
 import PokemonType from "./pokemon-type";
@@ -19,27 +13,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 type Props = {
   moves: PokemonMove[];
   pokemon: string;
-};
-
-const TYPES_COLORS = {
-  normal: "150 1% 63%",
-  fighting: "24 100% 58%",
-  flying: "209 73% 72%",
-  poison: "280 58% 50%",
-  ground: "23 60% 36%",
-  rock: "54 21% 60%",
-  bug: "71 54% 42%",
-  ghost: "305 31% 34%",
-  steel: "194 39% 55%",
-  fire: "350 94% 47%",
-  water: "215 81% 56%",
-  grass: "123 53% 42%",
-  electric: "42 94% 60%",
-  psychic: "338 90% 58%",
-  ice: "191 97% 61%",
-  dragon: "238 65% 61%",
-  dark: "7 13% 27%",
-  fairy: "304 89% 69%",
 };
 
 type TableRow = {
@@ -91,12 +64,9 @@ const columns: ColumnDef<TableRow>[] = [
     cell: (opt) => {
       const value = opt.getValue<"physical" | "special" | "status">();
       const icons = {
-        physical:
-          "https://archives.bulbagarden.net/media/upload/b/b4/PhysicalIC_SV.png",
-        special:
-          "https://archives.bulbagarden.net/media/upload/5/5b/SpecialIC_SV.png",
-        status:
-          "https://archives.bulbagarden.net/media/upload/e/e0/StatusIC_SV.png",
+        physical: "/PhysicalIC_SV.png",
+        special: "/SpecialIC_SV.png",
+        status: "/StatusIC_SV.png",
       };
       const icon = icons[value];
 
@@ -140,9 +110,9 @@ export default function PokemonMoves({ moves, pokemon }: Props) {
         return {
           name: move.name,
           category: move.damage_class?.name ?? "",
-          description,
           power: move.power ?? 0,
           type: move.type,
+          description,
         } satisfies TableRow;
       }) ?? []
     );

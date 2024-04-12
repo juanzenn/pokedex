@@ -1,6 +1,6 @@
 import { useGetPokemonEvolutionChain } from "@/hooks/use-pokemons";
 import { capitalize, cn } from "@/lib/utils";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React from "react";
@@ -11,7 +11,7 @@ export default function PokemonEvolutions({ name }: Props) {
   const searchParams = useSearchParams();
   const previousPage = searchParams.get("page");
 
-  const { data: step = [] } = useGetPokemonEvolutionChain(name);
+  const { data: step = [], isFetching } = useGetPokemonEvolutionChain(name);
   const lastIndex = step.length - 1;
 
   return (
@@ -50,6 +50,11 @@ export default function PokemonEvolutions({ name }: Props) {
           </span>
         </section>
       ))}
+      {isFetching && (
+        <figure className="min-h-[140px] flex items-center justify-center">
+          <Loader2 className="animate-spin" />
+        </figure>
+      )}
     </section>
   );
 }
