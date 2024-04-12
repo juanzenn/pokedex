@@ -14,7 +14,7 @@ export default function BackToHome() {
   }
 
   return (
-    <Button className="mb-6 sticky top-4 shadow-md z-10" asChild>
+    <Button className="mb-6 sticky top-0 shadow-md z-10" asChild>
       <Link href={getHomepageLink()} className="flex gap-2 font-medium">
         <ChevronLeft size={14} /> Back
       </Link>

@@ -24,8 +24,6 @@ export default function PokemonAbility({ ability, isHidden }: Props) {
     data.flavor_text_entries.find((entry) => entry.language.name === "en")
       ?.flavor_text ?? "";
 
-  console.log(data.flavor_text_entries);
-
   if (data)
     return (
       <Tooltip delayDuration={0}>
@@ -34,7 +32,7 @@ export default function PokemonAbility({ ability, isHidden }: Props) {
             {capitalize(removeHyphen(data.name))}
           </div>
         </TooltipTrigger>
-        <TooltipContent>
+        <TooltipContent className="max-w-[300px]">
           {isHidden && (
             <p className="flex items-center gap-2 mb-2">
               <Gem size={16} /> <strong>Hidden Ability</strong>
