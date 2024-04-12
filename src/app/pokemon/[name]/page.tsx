@@ -2,6 +2,7 @@
 
 import BackToHome from "@/components/back-to-home";
 import PokemonAbility from "@/components/pokemon-ability";
+import PokemonBaseStats from "@/components/pokemon-base-stats";
 import PokemonEvolutions from "@/components/pokemon-evolutions";
 import PokemonMoves from "@/components/pokemon-moves";
 import PokemonSprites from "@/components/pokemon-sprites";
@@ -44,6 +45,7 @@ export default function PokemonPage({ params: { name: pokemonName } }: Props) {
     moves = [],
     types = [],
     abilities = [],
+    stats,
     cries = { latest: "", legacy: "" },
   } = pokemon ?? {};
 
@@ -154,7 +156,7 @@ export default function PokemonPage({ params: { name: pokemonName } }: Props) {
                 </div>
                 <div>
                   <strong>Cry:</strong>
-                  <section className="flex flex-wrap gap-2 mt-2">
+                  <section className="space-y-2 mt-2">
                     <CryPlayer source={cries.latest} />
 
                     {cries.legacy && (
@@ -167,6 +169,14 @@ export default function PokemonPage({ params: { name: pokemonName } }: Props) {
                     )}
                   </section>
                 </div>
+                {stats && (
+                  <div>
+                    <strong>Base Stats:</strong>
+                    <section className="">
+                      <PokemonBaseStats stats={stats} />
+                    </section>
+                  </div>
+                )}
               </div>
             </aside>
           </section>
