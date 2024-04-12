@@ -28,10 +28,7 @@ const columns: ColumnDef<TableRow>[] = [
     accessorKey: "name",
     header: "Name",
     cell: (opt) => (
-      <strong
-        className="line-clamp-1"
-        title={capitalize(removeHyphen(opt.getValue<string>()))}
-      >
+      <strong title={capitalize(removeHyphen(opt.getValue<string>()))}>
         {capitalize(removeHyphen(opt.getValue<string>()))}
       </strong>
     ),
@@ -40,9 +37,7 @@ const columns: ColumnDef<TableRow>[] = [
     accessorKey: "description",
     header: "Description",
     cell: (opt) => (
-      <p className="line-clamp-1" title={opt.getValue<string>()}>
-        {opt.getValue<string>()}
-      </p>
+      <p title={opt.getValue<string>()}>{opt.getValue<string>()}</p>
     ),
   },
   {
