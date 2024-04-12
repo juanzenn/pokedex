@@ -2,6 +2,7 @@ import React from "react";
 
 export function useVisited(name: string) {
   const [visited, setVisited] = React.useState(() => {
+    if (typeof window === undefined) return false;
     const pokemonsVisited = window.localStorage.getItem("pokemons");
     if (!pokemonsVisited) return false;
 

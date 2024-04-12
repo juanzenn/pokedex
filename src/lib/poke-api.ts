@@ -10,6 +10,10 @@ export const pokemonApi = new PokemonClient();
 export const moveApi = new MoveClient();
 export const evolutionApi = new EvolutionClient();
 
+type PokemonWithCries = Pokemon & {
+  cries: { latest: string; legacy: string | undefined };
+};
+
 export async function getPokemons(currentPage: number = 0) {
   const LIMIT = 15;
   let offset = 0;
@@ -21,7 +25,7 @@ export async function getPokemons(currentPage: number = 0) {
   const res = await pokemonApi.listPokemons(offset, LIMIT);
 
   const pokemons = await Promise.all(
-    res.results.map(async (resource): Promise<Pokemon> => {
+    res.results.map(async (resource) => {
       const pokemon = await pokemonApi.getPokemonByName(resource.name);
       return pokemon;
     })
@@ -32,5 +36,5 @@ export async function getPokemons(currentPage: number = 0) {
 
 export async function getPokemon(name: string) {
   const pokemon = await pokemonApi.getPokemonByName(name);
-  return pokemon;
+  return pokemon as PokemonWithCries;
 }

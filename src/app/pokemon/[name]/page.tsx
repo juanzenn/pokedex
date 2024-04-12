@@ -6,6 +6,7 @@ import PokemonEvolutions from "@/components/pokemon-evolutions";
 import PokemonMoves from "@/components/pokemon-moves";
 import PokemonSprites from "@/components/pokemon-sprites";
 import PokemonType from "@/components/pokemon-type";
+import CryPlayer from "@/components/ui/cry-player";
 import VisitedBadge from "@/components/visited-badge";
 
 import { useGetPokemon } from "@/hooks/use-pokemons";
@@ -17,7 +18,7 @@ import {
   renderId,
   weightToKilograms,
 } from "@/lib/utils";
-import { Loader2 } from "lucide-react";
+import { FolderLock, Loader2 } from "lucide-react";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -43,11 +44,15 @@ export default function PokemonPage({ params: { name: pokemonName } }: Props) {
     moves = [],
     types = [],
     abilities = [],
+    cries = { latest: "", legacy: "" },
   } = pokemon ?? {};
+
   const pokemonImage = sprites?.other?.["official-artwork"].front_default;
 
   React.useEffect(
     function saveVisitedPokemons() {
+      if (typeof window === undefined) return;
+
       const visitedPokemons = window.localStorage.getItem("pokemons");
       if (visitedPokemons) {
         const parsed: string[] = JSON.parse(visitedPokemons);
@@ -145,6 +150,21 @@ export default function PokemonPage({ params: { name: pokemonName } }: Props) {
                         isHidden={is_hidden}
                       />
                     ))}
+                  </section>
+                </div>
+                <div>
+                  <strong>Cry:</strong>
+                  <section className="flex flex-wrap gap-2 mt-2">
+                    <CryPlayer source={cries.latest} />
+
+                    {cries.legacy && (
+                      <div className="w-full">
+                        <p className="flex items-center gap-2 mb-2 text-sm font-medium">
+                          <FolderLock size={16} /> Legacy cry
+                        </p>
+                        <CryPlayer source={cries.legacy} />
+                      </div>
+                    )}
                   </section>
                 </div>
               </div>
