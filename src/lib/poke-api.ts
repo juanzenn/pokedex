@@ -1,8 +1,14 @@
-import { MoveClient, PokemonClient, type Pokemon } from "pokenode-ts";
+import {
+  EvolutionClient,
+  MoveClient,
+  PokemonClient,
+  type Pokemon,
+} from "pokenode-ts";
 
 // *** API CALLS *** //
 export const pokemonApi = new PokemonClient();
 export const moveApi = new MoveClient();
+export const evolutionApi = new EvolutionClient();
 
 export async function getPokemons(currentPage: number = 0) {
   const LIMIT = 15;

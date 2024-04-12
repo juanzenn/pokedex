@@ -1,5 +1,12 @@
-import { getPokemon, getPokemons, moveApi, pokemonApi } from "@/lib/poke-api";
+import {
+  evolutionApi,
+  getPokemon,
+  getPokemons,
+  moveApi,
+  pokemonApi,
+} from "@/lib/poke-api";
 import { useQuery } from "@tanstack/react-query";
+import { ChainLink, EvolutionChain, EvolutionDetail } from "pokenode-ts";
 
 export function useGetPokemons(page: number = 0) {
   return useQuery({
@@ -43,3 +50,54 @@ export function useGetPokemonMoves(name: string[], pokemon: string) {
     },
   });
 }
+
+export function useGetPokemonEvolutionChain(name: string) {
+  return useQuery({
+    queryKey: ["evolution", name],
+    queryFn: async () => {
+      const specie = await pokemonApi.getPokemonSpeciesByName(name);
+      const { evolution_chain } = specie;
+      const chainId = evolution_chain.url.split("/")[6];
+      const { chain } = await evolutionApi.getEvolutionChainById(
+        Number(chainId)
+      );
+      let idx = 0;
+      let evolutionsMap = new Map<number, string[]>();
+
+      function parseChainLink(link: ChainLink, index = 0) {
+        if (link.evolves_to.length > 0) {
+          idx++;
+          link.evolves_to.map((next) => parseChainLink(next, idx));
+        }
+
+        if (evolutionsMap.get(index)) {
+          evolutionsMap.set(index, [
+            ...(evolutionsMap.get(index) ?? []),
+            ...[link.species.name],
+          ]);
+        } else {
+          evolutionsMap.set(index, [link.species.name]);
+        }
+      }
+      parseChainLink(chain);
+
+      const evolutionSteps = Array.from(evolutionsMap)
+        .map(([, value]) => value)
+        .reverse();
+
+      return await Promise.all(
+        evolutionSteps.map(async (step) => {
+          const stepEvolutions = await Promise.all(
+            step.map(async (name) => {
+              const pokemon = await pokemonApi.getPokemonByName(name);
+              return { name, sprite: pokemon.sprites.front_default ?? "" };
+            })
+          );
+
+          return stepEvolutions;
+        })
+      );
+    },
+  });
+}
+``;

@@ -2,6 +2,7 @@
 
 import BackToHome from "@/components/back-to-home";
 import PokemonAbility from "@/components/pokemon-ability";
+import PokemonEvolutions from "@/components/pokemon-evolutions";
 import PokemonMoves from "@/components/pokemon-moves";
 import PokemonSprites from "@/components/pokemon-sprites";
 import PokemonType from "@/components/pokemon-type";
@@ -39,8 +40,8 @@ export default function PokemonPage({ params: { name: pokemonName } }: Props) {
     moves = [],
     types = [],
     abilities = [],
+    species,
   } = pokemon ?? {};
-
   const pokemonImage = sprites?.other?.["official-artwork"].front_default;
 
   return (
@@ -73,6 +74,7 @@ export default function PokemonPage({ params: { name: pokemonName } }: Props) {
 
               <section>
                 <h2 className="font-bold text-2xl mb-4">Evolution Chain</h2>
+                <PokemonEvolutions name={name} />
               </section>
             </div>
 

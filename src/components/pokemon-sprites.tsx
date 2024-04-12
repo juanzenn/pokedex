@@ -17,8 +17,6 @@ export default function PokemonSprites({ sprites }: Props) {
     front_shiny_female,
   } = sprites;
 
-  console.log(sprites);
-
   return (
     <div className="mx-auto w-fit space-y-6">
       <section className="flex items-center gap-2">
