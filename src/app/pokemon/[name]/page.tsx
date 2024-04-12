@@ -7,7 +7,6 @@ import PokemonMoves from "@/components/pokemon-moves";
 import PokemonSprites from "@/components/pokemon-sprites";
 import PokemonType from "@/components/pokemon-type";
 
-import { Button } from "@/components/ui/button";
 import { useGetPokemon } from "@/hooks/use-pokemons";
 import {
   capitalize,
@@ -15,8 +14,7 @@ import {
   renderId,
   weightToKilograms,
 } from "@/lib/utils";
-import { ChevronLeft, Loader2 } from "lucide-react";
-import Link from "next/link";
+import { Loader2 } from "lucide-react";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -40,7 +38,6 @@ export default function PokemonPage({ params: { name: pokemonName } }: Props) {
     moves = [],
     types = [],
     abilities = [],
-    species,
   } = pokemon ?? {};
   const pokemonImage = sprites?.other?.["official-artwork"].front_default;
 

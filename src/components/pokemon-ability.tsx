@@ -2,7 +2,7 @@
 
 import { useGetPokemonAbility } from "@/hooks/use-pokemons";
 import { capitalize, removeHyphen } from "@/lib/utils";
-import { EyeOff, Gem } from "lucide-react";
+import { Gem } from "lucide-react";
 import { NamedAPIResource } from "pokenode-ts";
 import React from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";

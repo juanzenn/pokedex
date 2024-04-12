@@ -6,7 +6,7 @@ import {
   pokemonApi,
 } from "@/lib/poke-api";
 import { useQuery } from "@tanstack/react-query";
-import { ChainLink, EvolutionChain, EvolutionDetail } from "pokenode-ts";
+import { ChainLink } from "pokenode-ts";
 
 export function useGetPokemons(page: number = 0) {
   return useQuery({
