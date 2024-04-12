@@ -34,7 +34,10 @@ export default function PokemonType({ type }: Props) {
   const { name } = type;
   const { data, isFetching } = useGetPokemonType(name);
 
-  if (isFetching) return <div className="w-20 bg-primary animate-pulse" />;
+  if (isFetching)
+    return (
+      <div className="w-20 h-8 bg-primary/85 animate-pulse rounded-lg py-[2px] px-4" />
+    );
 
   if (data)
     return (
@@ -42,7 +45,7 @@ export default function PokemonType({ type }: Props) {
         className="text-sm bg-primary/85 border-2 border-primary rounded-lg py-[2px] px-4 flex items-center justify-center shadow-sm font-medium uppercase tracking-tight text-white cursor-default"
         style={
           {
-            "--primary": TYPES_COLORS[data.name],
+            "--primary": TYPES_COLORS[data.name as keyof typeof TYPES_COLORS],
           } as React.CSSProperties
         }
       >

@@ -1,9 +1,15 @@
 "use client";
 
 import { useGetPokemonMoves } from "@/hooks/use-pokemons";
-import { capitalize, removeHyphen } from "@/lib/utils";
+import { capitalize, range, removeHyphen } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
-import { BombIcon, CalendarMinus, IceCream, WavesIcon } from "lucide-react";
+import {
+  BombIcon,
+  CalendarMinus,
+  IceCream,
+  Loader2,
+  WavesIcon,
+} from "lucide-react";
 import { NamedAPIResource, PokemonMove } from "pokenode-ts";
 import React from "react";
 import PokemonType from "./pokemon-type";
@@ -118,10 +124,10 @@ const columns: ColumnDef<TableRow>[] = [
   },
 ];
 
-export default function PokemonMoves({ moves }: Props) {
-  const { data } = useGetPokemonMoves(
+export default function PokemonMoves({ moves, pokemon }: Props) {
+  const { data, isFetching } = useGetPokemonMoves(
     moves.map((m) => m.move.name),
-    "test"
+    pokemon
   );
 
   const tableData: TableRow[] = React.useMemo(() => {
@@ -144,7 +150,13 @@ export default function PokemonMoves({ moves }: Props) {
 
   return (
     <div className="w-full">
-      <DataTable columns={columns} data={tableData} />
+      {isFetching ? (
+        <div className="min-h-[560px] flex items-center justify-center bg-primary/80 rounded-2xl">
+          <Loader2 className="animate-spin" />
+        </div>
+      ) : (
+        <DataTable columns={columns} data={tableData} />
+      )}
     </div>
   );
 }
