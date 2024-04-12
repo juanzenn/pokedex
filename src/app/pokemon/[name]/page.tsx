@@ -6,10 +6,13 @@ import PokemonEvolutions from "@/components/pokemon-evolutions";
 import PokemonMoves from "@/components/pokemon-moves";
 import PokemonSprites from "@/components/pokemon-sprites";
 import PokemonType from "@/components/pokemon-type";
+import VisitedBadge from "@/components/visited-badge";
 
 import { useGetPokemon } from "@/hooks/use-pokemons";
+import { useVisited } from "@/hooks/use-visited";
 import {
   capitalize,
+  cn,
   heightToMeters,
   renderId,
   weightToKilograms,
@@ -23,6 +26,8 @@ type Props = {
 };
 
 export default function PokemonPage({ params: { name: pokemonName } }: Props) {
+  const [visited] = useVisited(pokemonName);
+
   if (pokemonName.length <= 0) notFound();
 
   const { data: pokemon, isFetching } = useGetPokemon(pokemonName);
@@ -40,6 +45,26 @@ export default function PokemonPage({ params: { name: pokemonName } }: Props) {
     abilities = [],
   } = pokemon ?? {};
   const pokemonImage = sprites?.other?.["official-artwork"].front_default;
+
+  React.useEffect(
+    function saveVisitedPokemons() {
+      const visitedPokemons = window.localStorage.getItem("pokemons");
+      if (visitedPokemons) {
+        const parsed: string[] = JSON.parse(visitedPokemons);
+        const isVisited = parsed.find((v) => v === pokemonName);
+
+        if (isVisited) return;
+
+        window.localStorage.setItem(
+          "pokemons",
+          JSON.stringify([...parsed, pokemonName])
+        );
+      } else {
+        window.localStorage.setItem("pokemons", JSON.stringify([pokemonName]));
+      }
+    },
+    [pokemonName]
+  );
 
   return (
     <section className="container">
@@ -75,7 +100,13 @@ export default function PokemonPage({ params: { name: pokemonName } }: Props) {
               </section>
             </div>
 
-            <aside className="bg-primary/80 rounded-2xl px-6 py-3 border border-primary lg:min-w-[35%] h-fit lg:sticky top-0">
+            <aside
+              className={cn(
+                "bg-primary/80 rounded-2xl px-6 py-3 border border-primary lg:min-w-[35%] h-fit lg:sticky top-0"
+              )}
+            >
+              <VisitedBadge visited={visited} />
+
               <p className="font-semibold text-lg text-center mb-2">
                 {capitalize(name)}
               </p>
