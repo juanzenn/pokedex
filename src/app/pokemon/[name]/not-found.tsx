@@ -7,7 +7,7 @@ export default function NotFound() {
       <div className="bg-primary/70 backdrop-blur-sm p-6 rounded-xl h-[93dvh] overflow-auto">
         <BackToHome />
 
-        <div className="h-3/5 flex flex-col items-center justify-center gap-5">
+        <div className="h-4/5 flex flex-col items-center justify-center gap-5">
           {/* eslint-disable-next-line */}
           <img
             src="/not-found.jpg"

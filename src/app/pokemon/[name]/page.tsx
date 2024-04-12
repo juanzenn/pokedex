@@ -47,9 +47,9 @@ export default function PokemonPage({ params: { name: pokemonName } }: Props) {
         <BackToHome />
 
         {isFetching ? (
-          <p className="flex justify-center gap-2">
+          <div className="h-4/5 flex items-center justify-center gap-2">
             <Loader2 className="animate-spin" size={40} />
-          </p>
+          </div>
         ) : (
           <section className="flex flex-col-reverse gap-4 lg:gap-8 lg:flex-row">
             <div className="flex-1 space-y-8">

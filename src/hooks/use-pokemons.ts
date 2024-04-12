@@ -18,6 +18,7 @@ export function useGetPokemons(page: number = 0) {
 export function useGetPokemon(name: string) {
   return useQuery({
     queryKey: ["pokemon", name],
+    retry: false,
     queryFn: async () => await getPokemon(name),
   });
 }
