@@ -1,8 +1,8 @@
-import { PokemonSprites } from "pokenode-ts";
+import { type PokemonSprites as TPokemonSprites } from "pokenode-ts";
 import React from "react";
 
 type Props = {
-  sprites: PokemonSprites;
+  sprites: TPokemonSprites;
 };
 
 export default function PokemonSprites({ sprites }: Props) {

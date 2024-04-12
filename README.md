@@ -4,11 +4,11 @@ A pokedex app using the [Pokemon API](https://pokeapi.co/). This project was cre
 
 ## Description
 
-The main application is a SPA using Next and React. The main feature is a dashboard with a list off all pokemons, and a single page with most information about a selected Pokemon. As an extra feature, I added the following aspects:
+The main application is a SPA using Next and React. The main feature is a dashboard with a list off all pokemons, and a single page with most information about a selected Pokemon. This application is created with Next.js, however, I decided to deactivate SSR to better reflect the technical challenge requirements.
 
--
--
--
+I'm using Tanstack Query as the solution for data fetching. I also used `window.locaStorage` to implement the **Visited** feature.
+
+This application is deployed on Vercel, and you can find it via this [link](https://pokedex.juanalvarez.dev/).
 
 ## Local Development
 

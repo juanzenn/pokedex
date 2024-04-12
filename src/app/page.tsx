@@ -1,31 +1,14 @@
-"use client";
-
-import GridSkeleton from "@/components/grid-skeleton";
-import Pagination from "@/components/pagination";
-import PokemonGrid from "@/components/pokemon-grid";
-import { usePagination } from "@/hooks/use-pagination";
-import { useGetPokemons } from "@/hooks/use-pokemons";
-import React from "react";
+import Homepage from "@/components/pages/homepage";
+import { Suspense } from "react";
 
 export default function Home() {
-  const [currentPage, handleChangePage] = usePagination();
-
-  const { data, isFetching } = useGetPokemons(currentPage);
-  const { next, previous, pokemons } = data ?? {};
+  // I decided the best way to follow the technical challenge requirements was
+  // by not using Next.js SSR. I disabled SSR in both pages, using React Query as
+  // the fetching mechanism.
 
   return (
-    <>
-      {isFetching ? (
-        <GridSkeleton />
-      ) : (
-        <PokemonGrid pokemons={pokemons ?? []} currentPage={currentPage} />
-      )}
-
-      <Pagination
-        handleChangePage={handleChangePage}
-        hasNext={Boolean(next?.length)}
-        hasPrevious={Boolean(previous?.length)}
-      />
-    </>
+    <Suspense>
+      <Homepage />
+    </Suspense>
   );
 }
