@@ -13,11 +13,11 @@ export default function PokemonBaseStats({ stats }: Props) {
     return (num * 100) / MAX;
   }
 
-  const sorted = stats.sort((a, b) => a.base_stat - b.base_stat);
+  const sorted = stats.slice().sort((a, b) => a.base_stat - b.base_stat);
   const minStat = sorted[0];
   const maxStat = sorted[stats.length - 1];
 
-  console.log(minStat, maxStat);
+  console.log(stats);
 
   return (
     <div className="">
