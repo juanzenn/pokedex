@@ -107,7 +107,7 @@ export default function PokemonPage({ params: { name: pokemonName } }: Props) {
 
             <aside
               className={cn(
-                "bg-primary/80 rounded-2xl px-6 py-3 border border-primary lg:min-w-[35%] h-fit lg:sticky top-0"
+                "relative bg-primary/80 rounded-2xl px-6 py-3 border border-primary lg:min-w-[35%] h-fit lg:sticky top-0"
               )}
             >
               <VisitedBadge visited={visited} />
